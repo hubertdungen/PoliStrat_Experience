@@ -7,7 +7,8 @@ Welcome to the **PoliStrat** project. This simulation visualizes interactions be
 ## Table of Contents
 
 - [Overview](#overview)
-- [Features](#features)
+- [Current Features](#current-features)
+- [Upcoming Features](#upcoming-features)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -27,7 +28,7 @@ This project is a Python-based simulation that represents interactions among ind
 - **Visualization**: The simulation includes a very basic graphical user interface using Tkinter (mainly text), and a 2D political compass plot using Matplotlib to visualize group ideologies.
 - **Real-Time Updates**: The simulation updates in real-time 1 FPS, showing changes in individual and group attributes and actions.
 
-  ## Upcoming Features
+## Upcoming Features
 
 - **Wiser AI**
 - **More Interactions and Chains**
