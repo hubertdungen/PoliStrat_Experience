@@ -47,7 +47,7 @@ This project is a Python-based simulation that represents interactions among ind
 
 1. Clone the repository:
    ```sh
-   git clone https://[[github.com/hubertdungen/simulation-of-individuals-and-groups](https://github.com/hubertdungen/PoliStrat_Experience)](https://github.com/hubertdungen/PoliStrat_Experience).git
+   git clone https://github.com/hubertdungen/PoliStrat_Experience.git
    cd simulation-of-individuals-and-groups
 
 2. Install the required packages:
