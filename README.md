@@ -1,5 +1,5 @@
 # PoliStrat Experience
-# Simulation of Individuals and Groups
+- Simulation of Individuals and Groups
 
 
 Welcome to the **PoliStrat** project. This simulation visualizes interactions between individuals with varying attributes, allowing them to form groups, governments, and ideologies, and engage in different actions such as collaboration, conflict, and isolation. 
