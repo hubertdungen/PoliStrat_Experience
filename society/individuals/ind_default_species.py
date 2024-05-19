@@ -3,63 +3,102 @@
 ### ---------------------------------------------------------------------- ###
 
 ## IMPORTS
-from dataclasses import dataclass
 from typing import Tuple, Dict, List
 import random
-from society.individuals.ind_attributes import DNA
+from ind_attributes import (
+    ReproductionFertility, ReproductionType, ReproductionMode, ReproductionProcess, Genetics, DietType, 
+    MortalityType, Fisionomy, Senses, MentalNature, MyerBrigs, Personality, DNA, Mood, MoodType
+)
+from society_math import gaussian_randoretm_with_center_and_clipping as gaussian_random
 
+## TEMPLATE SPECIES ATTRIBUTES
 
-## CLASSES
-@dataclass
-class DefaultSpecies:
-    
-    def __init__(self):
-        # #  DNA
-        # ## Species Factors and Biology
-        self.species = "Human"
-        self.species_family = "Hominidae"
-        self.species_diet = "Omnivore"
-        self.species_lifespan = 80
-        self.species_intelligence = (8, 8)
-        self.species_strength = (7, 7)
-        self.species_speed = (6, 6)
-        self.species_endurance = (7, 7)
-        self.species_dexterity = (6, 6)
-        self.species_speech = (7, 7)
-        self.species_social = (7, 7)
-        self.species_vitality = (7, 7)
-        self.species_aggression = (6, 6)
-        # ## Senses
-        self.species_vision = (7, 7)
-        self.species_hearing = (7, 7)
-        self.species_smell = (6, 6)
-        self.species_taste = (6, 6)
-        self.species_touch = (6, 6)
-        # ## Fisionomy
-        self.species_height = (1.8, 1.8)
-        self.species_weight = (70, 70)
-        # ## Reproduction
-        self.species_reproduction = "Sexual"
-        self.species_reproduction_type = "Viviparous"
-        self.species_maturity = (18, 18)
-        self.species_fertility = (25, 25)
-        self.species_gestation = (9, 9)
-        # ## Personality
-        self.personalities = {"Extroversion": 0.5, "Openness": 0.5, "Agreeableness": 0.5, "Conscientiousness": 0.5, "Neuroticism": 0.5}
-        # ## Skills
-        self.skills = {"Cooking": 0.5, "Fishing": 0.5, "Hunting": 0.5, "Gathering": 0.5, "Building": 0.5, "Crafting": 0.5, "Farming": 0.5, "Mining": 0.5}
-        # ## Emotions
-        self.emotions = {"Happiness": 0.5, "Fear": 0.5, "Anger": 0.5, "Sadness": 0.5, "Disgust": 0.5, "Surprise": 0.5}
-        # ## Needs
-        self.needs = {"Hunger": 0.5, "Thirst": 0.5, "Energy": 0.5, "Social": 0.5, "Hygiene": 0.5, "Comfort": 0.5, "Safety": 0.5, "Health": 0.5}
-        # ## Traits
-        self.traits = {"Strength": 0.5, "Speed": 0.5, "Endurance": 0.5, "Dexterity": 0.5, "Speech": 0.5, "Social": 0.5, "Vitality": 0.5, "Aggression": 0.5}
-        # ## Senses
-        self.senses = {"Vision": 0.5, "Hearing": 0.5, "Smell": 0.5, "Taste": 0.5, "Touch": 0.5}
-        # ## Fisionomy
-        self.fisionomy = {"Height": 0.5, "Weight": 0.5}
-        # ## Reproduction
-        self.reproduction = {"Maturity": 0.5, "Fertility": 0.5, "Gestation": 0.5}
-        # ## Social
-        
+# Define the default/template human race
+human_species = {
+    'species': 'Homo sapiens',
+    'species_phylum': 'Chordata',
+    'species_class': 'Mammalia',
+    'species_family': 'Hominidae',
+    # Reproduction
+    'species_reproduction': ReproductionType.SEXUAL,
+    'species_reproduction_type': ReproductionMode.VIVIPAROUS,
+    'species_reproduction_process': ReproductionProcess.MEIOSIS,
+    'species_reproduction_fertility': {
+        ReproductionFertility.MATURITY: gaussian_random(ReproductionFertility.MATURITY.value, 15, 18),
+        ReproductionFertility.FERTILITY: gaussian_random(ReproductionFertility.FERTILITY.value, 50, 75),
+        ReproductionFertility.GESTATION: gaussian_random(ReproductionFertility.GESTATION.value, 280, 280)
+    },
+    # Species traits
+    'species_diet': DietType.OMNIVORE,
+    'species_mortality': MortalityType.MORTAL,
+    'species_genetics': {
+        Genetics.LIFESPAN: gaussian_random(Genetics.LIFESPAN.value, 60, 80),
+        Genetics.DIMORPHISM: gaussian_random(Genetics.DIMORPHISM.value, 0.1, 0.5),
+        Genetics.INTELLIGENCE: gaussian_random(Genetics.INTELLIGENCE.value, 70, 100),
+        Genetics.CREATIVITY: gaussian_random(Genetics.CREATIVITY.value, 70, 100),
+        Genetics.EVOLUTION: gaussian_random(Genetics.EVOLUTION.value, 0.01, 0.1),
+        Genetics.DIVERSITY: gaussian_random(Genetics.DIVERSITY.value, 0.01, 0.1)
+    },
+    'species_fisionomy': {
+        Fisionomy.HEIGHT: gaussian_random(Fisionomy.HEIGHT.value, 150, 180),
+        Fisionomy.WEIGHT: gaussian_random(Fisionomy.WEIGHT.value, 50, 80),
+        Fisionomy.STRENGTH: gaussian_random(Fisionomy.STRENGTH.value, 40, 60),
+        Fisionomy.DEXTERITY: gaussian_random(Fisionomy.DEXTERITY.value, 40, 60),
+        Fisionomy.ENDURANCE: gaussian_random(Fisionomy.ENDURANCE.value, 40, 60),
+        Fisionomy.VITALITY: gaussian_random(Fisionomy.VITALITY.value, 40, 60)
+    },
+    'species_senses': {
+        Senses.HEARING: gaussian_random(Senses.HEARING.value, 50, 100),
+        Senses.VISION: gaussian_random(Senses.VISION.value, 0.5, 2.0)
+    },
+    # Mental
+    'species_mental': {
+        MentalNature.EXTROVERSION: gaussian_random(MentalNature.EXTROVERSION.value, 30, 70),
+        MentalNature.OPENNESS: gaussian_random(MentalNature.OPENNESS.value, 30, 70),
+        MentalNature.AGREEABLENESS: gaussian_random(MentalNature.AGREEABLENESS.value, 30, 70),
+        MentalNature.CONSCIENTIOUSNESS: gaussian_random(MentalNature.CONSCIENTIOUSNESS.value, 30, 70),
+        MentalNature.NEUROTICISM: gaussian_random(MentalNature.NEUROTICISM.value, 30, 70),
+        MentalNature.AGGRESSION: gaussian_random(MentalNature.AGGRESSION.value, 20, 40),
+        MentalNature.SOCIAL: gaussian_random(MentalNature.SOCIAL.value, 30, 70)
+    }
+}
 
+# Define the default human personality
+human_personality = {
+    'personality_mental': {
+        MentalNature.EXTROVERSION: gaussian_random(MentalNature.EXTROVERSION.value, 30, 70),
+        MentalNature.OPENNESS: gaussian_random(MentalNature.OPENNESS.value, 30, 70),
+        MentalNature.AGREEABLENESS: gaussian_random(MentalNature.AGREEABLENESS.value, 30, 70),
+        MentalNature.CONSCIENTIOUSNESS: gaussian_random(MentalNature.CONSCIENTIOUSNESS.value, 30, 70),
+        MentalNature.NEUROTICISM: gaussian_random(MentalNature.NEUROTICISM.value, 30, 70),
+        MentalNature.AGGRESSION: gaussian_random(MentalNature.AGGRESSION.value, 20, 40),
+        MentalNature.SOCIAL: gaussian_random(MentalNature.SOCIAL.value, 30, 70)
+    },
+    'myerbrigs_name': MyerBrigs.INTROVERSION  # Example default, can be adapted as needed
+}
+
+# Define the default human mood
+human_mood = {
+    'mood_type': {
+        MoodType.HAPPINESS: gaussian_random(MoodType.HAPPINESS.value, 50, 75),
+        MoodType.SADNESS: gaussian_random(MoodType.SADNESS.value, 10, 30),
+        MoodType.ANGER: gaussian_random(MoodType.ANGER.value, 10, 30),
+        MoodType.FEAR: gaussian_random(MoodType.FEAR.value, 10, 30),
+        MoodType.DISGUST: gaussian_random(MoodType.DISGUST.value, 10, 30),
+        MoodType.SURPRISE: gaussian_random(MoodType.SURPRISE.value, 40, 60),
+        MoodType.ALERTNESS: gaussian_random(MoodType.ALERTNESS.value, 40, 60),
+        MoodType.SAFETY: gaussian_random(MoodType.SAFETY.value, 50, 75),
+        MoodType.SLEEPINESS: gaussian_random(MoodType.SLEEPINESS.value, 10, 30),
+        MoodType.TIREDNESS: gaussian_random(MoodType.TIREDNESS.value, 10, 30),
+        MoodType.FOCUS: gaussian_random(MoodType.FOCUS.value, 40, 60),
+        MoodType.CURIOSITY: gaussian_random(MoodType.CURIOSITY.value, 50, 75),
+        MoodType.PERCEPTION: gaussian_random(MoodType.PERCEPTION.value, 50, 75)
+    }
+}
+
+# Grouping all human attributes into one dictionary
+human_template = {
+    'species': human_species,
+    'personality': human_personality,
+    'mood': human_mood
+}

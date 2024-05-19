@@ -1,5 +1,5 @@
 import random
-from group import groups
+from society.groups.group import groups
 
 
 class Individual:
