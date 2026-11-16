@@ -98,3 +98,6 @@ Contributions are welcome! Please open an issue to discuss what you would like t
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 Developed by Hubert Dungen.
+
+
+<p align="center"><a href="https://dlforge.dungenlabs.com"><img src="docs/branding/dlforge-logo.svg" alt="DL Forge" width="120"></a><br><a href="https://dlforge.dungenlabs.com">DL Forge</a></p>
